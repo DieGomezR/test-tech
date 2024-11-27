@@ -37,8 +37,75 @@ Este es un proyecto de una aplicación de gestión de posts con autenticación d
   - `config`: Configuración de la base de datos y otros parámetros.
   - `test`: Codigo para testeo.
 
-## Instalación
+# Estructura de la Base de Datos
 
+El proyecto utiliza una base de datos **PostgreSQL** para almacenar la información de los usuarios, posts y categorías. A continuación se detalla la estructura de la base de datos y los scripts SQL para crear las tablas necesarias.
+
+### 1. Tabla de Usuarios (`users`)
+
+Esta tabla almacena la información de los usuarios, incluyendo sus credenciales para la autenticación.
+
+```sql
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+);
+```
+- **id**: Identificador único para cada usuario.
+- **name**: Nombre del usuario.
+- **email**: Correo electrónico del usuario, debe ser único.
+- **password**: Contraseña cifrada del usuario.
+- **created_at**: Fecha de creación del usuario.
+
+### Tabla de Categorías (categories)
+
+Esta tabla almacena las categorías que los usuarios pueden seleccionar para sus posts.
+
+```sql
+CREATE TABLE categories (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+);
+```
+
+- **id**: Identificador único para cada categoría.
+- **name**: Nombre de la categoría.
+- **description**: Descripción de la categoría.
+- **created_at**: Fecha de creación de la categoría.
+
+### Tabla de Posts (posts)
+
+Esta tabla almacena los posts creados por los usuarios, que pueden ser categorizados.
+
+```sql
+CREATE TABLE posts (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    user_id INT REFERENCES users(id) ON DELETE CASCADE,
+    category_id INT REFERENCES categories(id) ON DELETE SET NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+);
+```
+- **id**: Identificador único para cada post.
+- **title**: Título del post.
+- **content**: Contenido del post.
+- **user_id**: Referencia al usuario que creó el post.
+- **category_id**: Referencia a la categoría seleccionada para el post.
+- **created_at**: Fecha de creación del post.
+
+
+## Relaciones entre las Tablas
+- **posts.user_id**: Relaciona un post con el usuario que lo creó.
+- **posts.category_id**: Relaciona un post con una categoría.
+- **categories**: Puede haber muchas categorías, pero cada post pertenece solo a una categoría.
+
+# Instalacion
 ### 1. Clonar el repositorio
 
 Primero, clona este repositorio en tu máquina local:
@@ -108,4 +175,3 @@ Abre tu navegador y navega a http://localhost:4200 para ver la aplicación en ac
 # Licencia
 
 Este proyecto está bajo la licencia MIT. Consulta el archivo LICENSE para más detalles.
-
