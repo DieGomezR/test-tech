@@ -1,0 +1,198 @@
+<div class="max-w-4xl mx-auto shadow-lg rounded-lg p-6 mt-4">
+  <div *ngIf="message" class="alert alert-info mb-4 text-red-600">
+    {{ message }}
+  </div>
+  <h1 class="text-3xl font-bold mb-5">Posts</h1>
+  <div class="grid grid-cols-2 gap-3">
+  <button
+    (click)="openModal()"
+    class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 my-4 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+  >
+    Agregar Nuevo Post
+  </button>
+  <button
+  (click)="openModalCategories()"
+  class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 my-4 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+>
+  Agregar Nueva Categoria
+</button>
+</div>
+  <!-- Modal Post -->
+  <div
+    *ngIf="isModalOpen"
+    class="fixed inset-0 flex justify-center items-center z-50 bg-gray-800 bg-opacity-50"
+  >
+    <div class="bg-white rounded-lg p-6 w-full max-w-lg">
+      <h2 class="text-2xl font-bold mb-4">Agregar Nuevo Post</h2>
+      <div *ngIf="modalMessage" class="alert alert-info mb-4 text-red-600">
+        {{ modalMessage }}
+      </div>
+      <form (submit)="createPost(); $event.preventDefault()">
+        <div class="mb-4">
+          <label
+            for="title"
+            class="block text-sm font-medium text-gray-900 dark:text-white"
+            >Título</label
+          >
+          <input
+            type="text"
+            id="title"
+            [(ngModel)]="newPost.title"
+            name="title"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Ingrese el título del post"
+            required
+          />
+        </div>
+        <div class="mb-4">
+          <label
+            for="category"
+            class="block text-sm font-medium text-gray-900 dark:text-white"
+            >Categoría</label
+          >
+          <select
+            [(ngModel)]="newPost.category_id"
+            name="category"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          >
+            <option value="" disabled selected>Seleccionar categoría</option>
+            <option *ngFor="let category of categories" [value]="category.id">
+              {{ category.name }}
+            </option>
+          </select>
+        </div>
+        <div class="mb-4">
+          <label
+            for="content"
+            class="block text-sm font-medium text-gray-900 dark:text-white"
+            >Contenido</label
+          >
+          <textarea
+            id="content"
+            [(ngModel)]="newPost.content"
+            name="content"
+            rows="4"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Ingrese el contenido del post"
+            required
+          ></textarea>
+        </div>
+
+        <div class="flex justify-between">
+          <button
+            type="button"
+            (click)="closeModal()"
+            class="text-gray-600 bg-gray-300 hover:bg-gray-400 font-medium rounded-lg text-sm px-5 py-2.5"
+          >
+            Cancelar
+          </button>
+          <button
+            type="submit"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5"
+          >
+            Crear Post
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal crear categoria -->
+  <div
+    *ngIf="isModalOpenCategories"
+    class="fixed inset-0 flex justify-center items-center z-50 bg-gray-800 bg-opacity-50"
+  >
+    <div class="bg-white rounded-lg p-6 w-full max-w-lg">
+      <h2 class="text-2xl font-bold mb-4">Agregar Nueva Categoría</h2>
+      <div *ngIf="categoryMessage" class="alert alert-info mb-4 text-red-600">
+        {{ categoryMessage }}
+      </div>
+      <form (submit)="createCategory(); $event.preventDefault()">
+        <div class="mb-4">
+          <label
+            for="categoryName"
+            class="block text-sm font-medium text-gray-900 dark:text-white"
+            >Nombre de la categoría</label
+          >
+          <input
+            type="text"
+            id="categoryName"
+            [(ngModel)]="newCategory.name"
+            name="categoryName"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Ingrese el nombre de la categoría"
+            required
+          />
+        </div>
+        <div class="mb-4">
+          <label
+            for="categoryDescription"
+            class="block text-sm font-medium text-gray-900 dark:text-white"
+            >Descripción de la categoría</label
+            >
+            <input
+            type="text"
+            id="categoryDescription"
+            [(ngModel)]="newCategory.description"
+            name="categoryDescription"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Ingrese la descripción de la categoría"
+            required
+            />
+        </div>
+
+        <div class="flex justify-between">
+          <button
+            type="button"
+            (click)="closeModalCategories()"
+            class="text-gray-600 bg-gray-300 hover:bg-gray-400 font-medium rounded-lg text-sm px-5 py-2.5"
+          >
+            Cancelar
+          </button>
+          <button
+            type="submit"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5"
+          >
+            Crear Categoría
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Select de categorías -->
+  <div class="mb-5">
+    <label class="block mb-2 text-sm font-medium text-gray-900"
+      >Selecciona una categoría:</label
+    >
+    <select
+      [(ngModel)]="selectedCategory"
+      (change)="loadPosts()"
+      name="categoryDropdown"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+    >
+      <option value="" disabled selected>Seleccionar categoría</option>
+      <option *ngFor="let category of categories" [value]="category.id">
+        {{ category.name }}
+      </option>
+    </select>
+  </div>
+
+  <div
+    *ngIf="posts.length === 0"
+    class="alert alert-info text-center text-gray-500"
+  >
+    No hay posts disponibles.
+  </div>
+
+  <div
+    *ngFor="let post of posts"
+    class="post-item bg-white shadow-md rounded-lg p-4 mb-4"
+  >
+    <h3 class="text-2xl font-semibold mb-2">{{ post.title }}</h3>
+    <p class="text-gray-700">{{ post.content }}</p>
+    <p class="text-gray-800">Categoría: {{ post.categoryname }}</p>
+    <hr class="my-4" />
+    <p class="text-gray-800">Hecho por: {{ post.username }}</p>
+  </div>
+</div>
