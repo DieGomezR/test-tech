@@ -1,0 +1,36 @@
+# Dependencias de Composer
+/vendor/
+
+# Archivos y carpetas generados por PHPUnit
+/phpunit.xml
+/phpunit.xml.dist
+/.phpunit.result.cache
+
+# Configuración específica del entorno
+.env
+/config/database.php
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de logs
+*.log
+logs/
+
+# Archivos temporales y caché
+/tmp/
+.cache/
+*.cache
+
+# Archivos de IDEs y editores
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Subidas de usuarios
+/uploads/
+
+# Otros archivos generados
+/public/uploads/
