@@ -2,13 +2,10 @@
 /vendor/
 
 # Archivos y carpetas generados por PHPUnit
-/phpunit.xml
-/phpunit.xml.dist
 /.phpunit.result.cache
 
 # Configuración específica del entorno
 .env
-/config/database.php
 
 # Archivos del sistema operativo
 .DS_Store
