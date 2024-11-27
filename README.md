@@ -95,84 +95,15 @@ ng serve
 Abre tu navegador y navega a http://localhost:4200 para ver la aplicación en acción.
 
 # Funcionalidades
-
-Memoria actualizada
-Gracias por la aclaración. Aquí tienes el README.md con los cambios correspondientes para reflejar que utilizas PHP en el backend:
-
-markdown
-Copiar código
-# Proyecto de Gestión de Posts con Autenticación
-
-Este es un proyecto de gestión de posts y categorías con autenticación, construido utilizando **Angular** en el frontend y **PHP** en el backend. El proyecto permite a los usuarios registrarse, iniciar sesión y gestionar publicaciones asociadas a diferentes categorías.
-
-## Tecnologías Utilizadas
-
-### Frontend
-- **Angular**: Framework utilizado para construir la interfaz de usuario.
-- **Bootstrap**: Framework CSS para la creación de interfaces responsivas.
-
-### Backend
-- **PHP**: Lenguaje de programación utilizado en el backend.
-- **MySQL/PostgreSQL**: Base de datos utilizada para almacenar usuarios, posts y categorías.
-- **JWT (JSON Web Token)**: Utilizado para manejar la autenticación de los usuarios.
-
-## Instalación
-
-### Backend (PHP)
-1. Clona el repositorio del backend en tu máquina local:
-   ```bash
-   git clone <url_del_repositorio_backend>
-   cd <nombre_del_directorio_backend>
-Crea una base de datos en MySQL o PostgreSQL y configura los parámetros de conexión en el archivo de configuración de tu backend.
-
-Instala las dependencias necesarias usando Composer:
-
-bash
-Copiar código
-composer install
-Configura el archivo .env para definir las credenciales de la base de datos y las claves secretas de JWT.
-
-Frontend (Angular)
-Clona el repositorio del frontend en tu máquina local:
-
-bash
-Copiar código
-git clone <url_del_repositorio_frontend>
-cd <nombre_del_directorio_frontend>
-Instala las dependencias de Angular:
-
-bash
-Copiar código
-npm install
-Si estás utilizando una API en local, asegúrate de que la URL en las solicitudes coincida con la del backend.
-
-Ejecución
-Backend
-Inicia el servidor de PHP utilizando el servidor integrado:
-
-bash
-Copiar código
-php -S localhost:8000
-Si estás utilizando un servidor Apache o Nginx, asegúrate de configurar correctamente las rutas y los archivos .htaccess o el archivo de configuración correspondiente.
-
-Frontend
-Inicia el servidor de desarrollo de Angular:
-
-bash
-Copiar código
-ng serve
-Abre tu navegador y navega a http://localhost:4200 para ver la aplicación en acción.
-
-# Funcionalidades
-## Autenticación
+### Autenticación
 - **Registro**: Los usuarios pueden registrarse proporcionando su nombre, correo electrónico y contraseña.
 - **Inicio de sesión**: Los usuarios pueden iniciar sesión con su correo electrónico y contraseña.
 - **Token**: Después de iniciar sesión, se genera un token que se almacena localmente y se utiliza para autenticar futuras solicitudes.
-- **Gestión de Posts**:
-Los usuarios autenticados pueden crear, leer y eliminar posts.
-Los posts están organizados por categorías.
-- **Gestión de Categorías**:
-Los usuarios pueden crear nuevas categorías para organizar los posts.
+### Gestión de Posts
+ - Los usuarios autenticados pueden crear, leer y eliminar posts.
+- Los posts están organizados por categorías.
+### Gestión de Categorías
+- Los usuarios pueden crear nuevas categorías para organizar los posts.
 
 # Licencia
 
